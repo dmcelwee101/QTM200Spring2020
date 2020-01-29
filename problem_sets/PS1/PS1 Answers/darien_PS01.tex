@@ -1,0 +1,200 @@
+\documentclass[12pt,letterpaper]{article}
+\usepackage{graphicx,textcomp}
+\usepackage{natbib}
+\usepackage{setspace}
+\usepackage{fullpage}
+\usepackage{color}
+\usepackage[reqno]{amsmath}
+\usepackage{amsthm}
+\usepackage{fancyvrb}
+\usepackage{amssymb,enumerate}
+\usepackage[all]{xy}
+\usepackage{endnotes}
+\usepackage{lscape}
+\newtheorem{com}{Comment}
+\usepackage{float}
+\usepackage{hyperref}
+\newtheorem{lem} {Lemma}
+\newtheorem{prop}{Proposition}
+\newtheorem{thm}{Theorem}
+\newtheorem{defn}{Definition}
+\newtheorem{cor}{Corollary}
+\newtheorem{obs}{Observation}
+\usepackage[compact]{titlesec}
+\usepackage{dcolumn}
+\usepackage{tikz}
+\usetikzlibrary{arrows}
+\usepackage{multirow}
+\usepackage{xcolor}
+\newcolumntype{.}{D{.}{.}{-1}}
+\newcolumntype{d}[1]{D{.}{.}{#1}}
+\definecolor{light-gray}{gray}{0.65}
+\usepackage{url}
+\usepackage{listings}
+\usepackage{color}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{mystyle}{
+	backgroundcolor=\color{backcolour},   
+	commentstyle=\color{codegreen},
+	keywordstyle=\color{magenta},
+	numberstyle=\tiny\color{codegray},
+	stringstyle=\color{codepurple},
+	basicstyle=\footnotesize,
+	breakatwhitespace=false,         
+	breaklines=true,                 
+	captionpos=b,                    
+	keepspaces=true,                 
+	numbers=left,                    
+	numbersep=5pt,                  
+	showspaces=false,                
+	showstringspaces=false,
+	showtabs=false,                  
+	tabsize=2
+}
+\lstset{style=mystyle}
+\newcommand{\Sref}[1]{Section~\ref{#1}}
+\newtheorem{hyp}{Hypothesis}
+
+\title{Problem Set 1}
+\date{Due: January 29, 2020}
+\author{QTM 200: Applied Regression Analysis}
+
+\begin{document}
+	\maketitle
+	
+	\section*{Instructions}
+	\begin{itemize}
+		\item Please show your work! You may lose points by simply writing in the answer. If the problem requires you to execute commands in \texttt{R}, please include the code you used to get your answers. Please also include the \texttt{.R} file that contains your code. If you are not sure if work needs to be shown for a particular problem, please ask.
+		\item Your homework should be submitted electronically on the course GitHub page in \texttt{.pdf} form.
+		\item This problem set is due at the beginning of class on Wednesday, January 22, 2020. No late assignments will be accepted.
+		\item Total available points for this homework is 100.
+	\end{itemize}
+	
+	\vspace{1cm}
+	\section*{Question 1 (25 points)}
+	
+	A private school counselor was curious about the average of IQ of the students in her school and took a random sample of 25 students' IQ scores. The following is the data set:
+	
+	\vspace{.5cm}
+	
+	\lstinputlisting[language=R, firstline=40, lastline=40]{PS1.R}  
+	
+	\vspace{.5cm}
+	
+	\noindent Find a 90\% confidence interval for the student IQ in the school assuming the population of IQ from which our random sample has been selected is normally distributed. 
+	
+	\section{Question 1 answer}
+	\lstinputlisting[language=R, firstline=45, lastline=51]{darien_PS1_rcode.R}  
+	
+	\noindent The confidence interval is (94.1, 102.7). There is a 90 percent probability that a confidence interval would contain the true average IQ of students in the school with repeated sampling. For example, if we gathered 100 samples, we would expect 90 of the CIs calculated to contain the population mean (student IQ in this school) and we would expect 10 of the CIs to not include the population mean.
+	
+	\vspace{1cm}
+	
+	\section*{Question 2 (25 points)}
+	A private school counselor was curious  whether  the average of IQ of the students in her school is higher than the average IQ score 100 among all the schools in the country. She took a random sample of 25 students' IQ scores. The following is the data set:
+	\vspace{.5cm}
+	\lstinputlisting[language=R, firstline=46, lastline=46]{PS1.R}  
+	\vspace{.5cm}
+	
+	\noindent Conduct a test with 0.05 significance level assuming the population of IQ from which our random sample has been selected is normally distributed.
+	 
+	\section{Question 2 Answer}
+	\lstinputlisting[language=R, firstline=61, lastline=66]{darien_PS1_rcode.R}
+	\noindent The p-value is 0.7215. Because the p-value is greater than the significance level of 0.05, I fail to reject the null hypothesis (that there are no significant differences between the sample IQ and the average IQ of 100 across all schools in the country). If the null hypothesis were true, there is a 72.15 percent probability that we would observe a test-statistic this extreme or more  The school counselor's students do not have a significantly higher average IQ than the average IQ of 100 of students across the country.
+	
+	\vspace{1cm}
+	\section*{Question 3 (50 points)}
+	
+	\noindent Researchers are curious about what affects the education expenditure on public education. The following is availabe variables in a data set about the education expenditure. \\
+	\vspace{.5cm}
+	
+	
+	\begin{tabular}{r|l}
+		\texttt{State} &\emph{50 states in US} \\
+		\texttt{Y} & \emph{per capita expenditure on public education}\\
+		\texttt{X1} &\emph{per capita personal income} \\
+		\texttt{X2} &  \emph{Number of residents per thousand under 18 years of age}\\
+		\texttt{X3} &  \emph{Number of people per thousand residing in urban areas} \\
+		\texttt{Region} &  \emph{1=Northeast, 2= North Central, 3= South, 4=West} \\
+	\end{tabular}
+	
+	\vspace{.5cm}
+	\noindent Explore the \texttt{expenditure} data set and import data into \texttt{R}.
+	\vspace{.5cm}
+	\lstinputlisting[language=R, firstline=54, lastline=54]{PS1.R}  
+	\vspace{.5cm}
+	\begin{itemize}
+		
+		\item
+		Please plot the relationships among \emph{Y}, \emph{X1}, \emph{X2}, and \emph{X3}? What are the correlations among them (you just need to describe the graph and the relationships among them)?
+		
+		\section{Question 3 Answers}
+		\lstinputlisting[language=R, firstline=75, lastline=77]{darien_PS1_rcode.R}	
+		\vspace{.5cm}
+		
+	\begin{figure} [H]
+		\includegraphics[width=\linewidth]{X1_Y.jpeg}
+	\end{figure}
+		\vspace{.5cm}	
+		\noindent There is a linear, moderate, positive relationship between per capita personal income and per capita expenditure on public education
+		\vspace{.5cm}
+		
+		\lstinputlisting[language=R, firstline=79, lastline=79]{darien_PS1_rcode.R}	
+	\begin{figure}[H]
+		\includegraphics[width=\linewidth]{X2_Y.jpeg}
+\end{figure}
+		\vspace{.5cm}
+		\noindent There does not appear to be a relationship between number of residents per thousand under 18 years old and per capita expenditure on public education.
+		\vspace{.5cm}
+		
+	\lstinputlisting[language=R, firstline=81, lastline=81]{darien_PS1_rcode.R}	
+		\begin{figure}[H]
+			\includegraphics[width=\linewidth]{X3_Y.jpeg}
+	\end{figure}
+		\vspace{.5cm}
+\noindent There is a linear, weak, positive relationship between number of people per thousand residing in urban areas  and per capita expenditure on public education
+\vspace{.5cm}	
+		\vspace{.5cm}
+		
+		\item
+		Please plot the relationship between \emph{Y} and \emph{Region}? On average, which region has the highest per capita expenditure on public education?
+		
+		\lstinputlisting[language=R, firstline=85, lastline=85]{darien_PS1_rcode.R}
+\begin{figure}[H]
+		\includegraphics[width=\linewidth]{Region_Y.jpeg}
+\end{figure}
+\vspace{.5cm}
+		\noindent Region 4 (West) has the highest per capita expenditure on public education.
+		\vspace{.5cm}
+		
+		\item
+		Please plot the relationship between \emph{Y} and \emph{X1}? Describe this graph and the relationship. Reproduce the above graph including one more variable \emph{Region} and display different regions with different types of symbols and colors.
+		
+\lstinputlisting[language=R, firstline=75, lastline=77]{darien_PS1_rcode.R}	
+	\vspace{.5cm}
+\begin{figure}[H]
+		\includegraphics[width=\linewidth]{X1_Y.jpeg}
+\end{figure}
+	\vspace{.5cm}	
+	\noindent There is a linear, moderate, positive relationship between per capita personal income and per capita expenditure on public education
+	\vspace{.5cm}
+	
+\lstinputlisting[language=R, firstline=92, lastline=94]{darien_PS1_rcode.R}	
+\vspace{.5cm}	
+\begin{figure}[H]
+	\includegraphics[width=\linewidth]{question 3 color.jpeg}
+\end{figure}
+
+	\end{itemize}
+	
+\end{document}
+pdf latex darien_PS01
+
+
+
+
