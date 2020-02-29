@@ -1,0 +1,131 @@
+\documentclass[12pt,letterpaper]{article}
+\usepackage{graphicx,textcomp}
+\usepackage{natbib}
+\usepackage{setspace}
+\usepackage{fullpage}
+\usepackage{color}
+\usepackage[reqno]{amsmath}
+\usepackage{amsthm}
+\usepackage{fancyvrb}
+\usepackage{amssymb,enumerate}
+\usepackage[all]{xy}
+\usepackage{endnotes}
+\usepackage{lscape}
+\newtheorem{com}{Comment}
+\usepackage{float}
+\usepackage{hyperref}
+\newtheorem{lem} {Lemma}
+\newtheorem{prop}{Proposition}
+\newtheorem{thm}{Theorem}
+\newtheorem{defn}{Definition}
+\newtheorem{cor}{Corollary}
+\newtheorem{obs}{Observation}
+\usepackage[compact]{titlesec}
+\usepackage{dcolumn}
+\usepackage{tikz}
+\usetikzlibrary{arrows}
+\usepackage{multirow}
+\usepackage{xcolor}
+\newcolumntype{.}{D{.}{.}{-1}}
+\newcolumntype{d}[1]{D{.}{.}{#1}}
+\definecolor{light-gray}{gray}{0.65}
+\usepackage{url}
+\usepackage{listings}
+\usepackage{color}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{mystyle}{
+	backgroundcolor=\color{backcolour},   
+	commentstyle=\color{codegreen},
+	keywordstyle=\color{magenta},
+	numberstyle=\tiny\color{codegray},
+	stringstyle=\color{codepurple},
+	basicstyle=\footnotesize,
+	breakatwhitespace=false,         
+	breaklines=true,                 
+	captionpos=b,                    
+	keepspaces=true,                 
+	numbers=left,                    
+	numbersep=5pt,                  
+	showspaces=false,                
+	showstringspaces=false,
+	showtabs=false,                  
+	tabsize=2
+}
+\lstset{style=mystyle}
+\newcommand{\Sref}[1]{Section~\ref{#1}}
+\newtheorem{hyp}{Hypothesis}
+
+\title{Problem Set 5}
+\date{Due: March 4, 2020}
+\author{QTM 200: Applied Regression Analysis}
+
+\begin{document}
+	\maketitle
+	
+	\section*{Instructions}
+	\begin{itemize}
+		\item Please show your work! You may lose points by simply writing in the answer. If the problem requires you to execute commands in \texttt{R}, please include the code you used to get your answers. Please also include the \texttt{.R} file that contains your code. If you are not sure if work needs to be shown for a particular problem, please ask.
+		\item Your homework should be submitted electronically on the course GitHub page in \texttt{.pdf} form.
+		\item This problem set is due at the beginning of class on Wednesday, March 4, 2020. No late assignments will be accepted.
+		\item Total available points for this homework is 100.
+	\end{itemize}
+	
+		\vspace{.5cm}
+	
+\noindent  Using the \texttt{teengamb} dataset, fit a model with \texttt{gamble} as the response and the other variables as predictors. 
+
+\vspace{.5cm}
+\lstinputlisting[language=R, firstline=41, lastline=43]{PS5.R}  
+\vspace{.5cm}
+Answer the following questions:
+\vspace{.5cm}
+\begin{enumerate}[(a)]
+	 \item Check the constant variance assumption for the errors by plotting the residuals versus the fitted values. \newpage
+\vspace{1cm}
+\lstinputlisting[language=R, firstline=46, lastline=46]{PS5_Answers.R} 
+\begin{figure} [H]
+	\includegraphics[width=\linewidth]{residual_vs_fitted.jpeg}
+\end{figure}
+\vspace{1cm}
+\noindent Overall, the plot looks good and the constant variance assumption seems to be satisfied. There is a larger amount of variance in the middle of the plot around 30 on the x-axis compared to the edges of the plot but it does not seem drastic.
+\vspace{3cm}
+
+	\item Check the normality assumption with a Q-Q plot of the studentized residuals. \vspace{1cm}
+\lstinputlisting[language=R, firstline=49, lastline=49]{PS5_Answers.R} 
+\begin{figure} [H]
+	\includegraphics[width=\linewidth]{qq_plot.jpeg}
+\end{figure}
+\vspace{1cm}
+\noindent The normality assumption appears to be satisfied because the points fall along a straight line on average with the exception of 24, 36, and 39.
+\vspace{3cm}	
+	\item Check for large leverage points by plotting the $h$ values. \vspace{1cm}
+\lstinputlisting[language=R, firstline=52, lastline=55]{PS5_Answers.R} 
+\begin{figure} [H]
+	\includegraphics[width=\linewidth]{hvalues.jpeg}
+\end{figure}
+\vspace{1cm}
+\noindent There are two large leverage points: 35 and 42.
+\vspace{3cm}
+	\item Check for outliers by running an \texttt{outlierTest}. \vspace{1cm}
+\lstinputlisting[language=R, firstline=58, lastline=59]{PS5_Answers.R} 
+\vspace{1cm}
+\noindent The adjusted p-value for the largest error hat*i is larger than 0.05, we conclude that this model does not have any extreme residuals.
+\vspace{3cm}	
+	\item Check for influential points by creating a "Bubble plot" with the hat-values and studentized residuals.
+\lstinputlisting[language=R, firstline=62, lastline=68]{PS5_Answers.R} 
+\begin{figure} [H]
+	\includegraphics[width=\linewidth]{bubbleplot.jpeg}
+\end{figure}
+\vspace{1cm}
+\noindent The influential points are 24, 31, 33, 35, 39, and 42.
+
+\end{enumerate}
+
+\end{document}
+
+pdf latex PS5_Answers
